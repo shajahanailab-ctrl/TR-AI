@@ -1,488 +1,337 @@
-# TR-AI
-You are a Principal Software Architect, Senior Full Stack Engineer, AI Engineer, Data Scientist, DevOps Engineer, UI/UX Designer, and Cloud Architect.
+# BuildSmart AI - Complete Enterprise SaaS Application
 
-Build a complete enterprise-grade SaaS application called:
+## Overview
 
-# BUILDSMART AI
-
-Tagline:
-"Predict. Design. Build."
-
-Purpose:
 BuildSmart AI is an AI-powered Construction Cost Prediction and Building Design Assistant that helps homeowners, architects, civil engineers, contractors, builders, and construction companies estimate project costs, generate building designs, calculate materials, predict project timelines, analyze risks, and interact with an AI construction chatbot.
 
-=========================================================
-TECH STACK
-=========================================================
-
-Frontend:
-- Next.js 15
-- React 19
-- TypeScript
-- TailwindCSS
-- ShadCN UI
-- Framer Motion
-- Recharts
-- React Hook Form
-- Zustand
-- Axios
-
-Backend:
-- FastAPI
-- Python 3.12
-
-Database:
-- PostgreSQL
-- Redis
-
-AI/ML:
-- Scikit-Learn
-- XGBoost
-- CatBoost
-- LangChain
-- OpenAI API
-- Hugging Face
-
-Cloud:
-- Docker
-- Kubernetes
-- AWS
-
-Authentication:
-- JWT
-- OAuth Google Login
-
-Storage:
-- AWS S3
-
-=========================================================
-APPLICATION MODULES
-=========================================================
-
-1. Authentication
-2. Dashboard
-3. Cost Prediction Engine
-4. Building Design Generator
-5. Material Recommendation Engine
-6. BOQ Generator
-7. Timeline Prediction
-8. Risk Analysis
-9. AI Chatbot
-10. Project Management
-11. Reports
-12. Admin Portal
-
-=========================================================
-DATABASE DESIGN
-=========================================================
-
-Create PostgreSQL schema.
-
-Users
-------
-id
-name
-email
-password_hash
-role
-created_at
-
-Projects
----------
-id
-user_id
-project_name
-country
-state
-city
-postal_code
-locality
-plot_area
-construction_area
-building_type
-floors
-material_type
-design_style
-budget
-estimated_cost
-timeline_days
-created_at
-
-MaterialRates
--------------
-id
-city
-material_name
-rate
-updated_at
-
-BuildingTemplates
------------------
-id
-template_name
-building_type
-floors
-style
-image_url
-
-Predictions
------------
-id
-project_id
-estimated_cost
-confidence_score
-risk_score
-timeline_days
-created_at
-
-ChatHistory
------------
-id
-user_id
-question
-response
-created_at
-
-=========================================================
-COST PREDICTION MODULE
-=========================================================
-
-Inputs:
-
-- Country
-- State
-- City
-- Postal Code
-- Locality
-- Plot Area
-- Construction Area
-- Building Type
-- Number of Floors
-- Material Type
-- Design Style
-- Budget
-
-Building Types:
-
-- Residential
-- Villa
-- Apartment
-- Commercial
-- Industrial
-- Warehouse
-
-Material Types:
-
-- Concrete
-- Wood
-- Steel
-- Hybrid
-
-Design Styles:
-
-- Modern
-- Luxury
-- Traditional
-- Contemporary
-- Industrial
-
-AI Cost Prediction Model:
-
-Use XGBoost.
-
-Calculate:
-
-- Estimated Cost
-- Cost Per Square Foot
-- Labor Cost
-- Material Cost
-- Project Duration
-
-Return confidence score.
-
-=========================================================
-LOCALITY INTELLIGENCE
-=========================================================
-
-Use Postal Code and Locality.
-
-Calculate:
-
-- Labor Index
-- Material Index
-- Transportation Cost
-- Weather Risk
-- Seismic Risk
-- Flood Risk
-
-Generate locality-specific recommendations.
-
-=========================================================
-BUILDING DESIGN GENERATOR
-=========================================================
-
-Generate floor plans automatically.
-
-Input:
-
-- Plot Area
-- Construction Area
-- Building Type
-- Floors
-- Style
-- Budget
-
-Generate:
-
-Ground Floor Layout
-
-Living Room
-Kitchen
-Dining
-Bedrooms
-Bathrooms
-Parking
-
-Upper Floor Layout
-
-Bedrooms
-Office
-Balcony
-Family Room
-
-Generate:
-
-- 2D Floor Plan
-- Exterior Elevation Concept
-- Interior Concept
-
-Integrate OpenAI image generation APIs.
-
-=========================================================
-BOQ GENERATOR
-=========================================================
-
-Generate:
-
-- Cement Bags
-- Steel Quantity
-- Sand
-- Bricks
-- Concrete
-- Paint
-
-Export to:
-
-PDF
-Excel
-
-=========================================================
-TIMELINE PREDICTION
-=========================================================
-
-Predict:
-
-Foundation
-Structure
-Roofing
-Electrical
-Plumbing
-Finishing
-
-Generate Gantt-style project schedule.
-
-=========================================================
-RISK ANALYSIS
-=========================================================
-
-Calculate:
-
-- Budget Overrun Risk
-- Delay Risk
-- Material Shortage Risk
-- Weather Risk
-
-Return:
-
-Low
-Medium
-High
-
-=========================================================
-AI CONSTRUCTION CHATBOT
-=========================================================
-
-Build chatbot using:
-
-LangChain
-OpenAI
-
-Capabilities:
-
-- Construction cost questions
+## Technology Stack
+
+### Frontend
+- **Next.js 15** - React framework for production
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **TailwindCSS** - Utility-first CSS framework
+- **ShadCN UI** - Component library
+- **Framer Motion** - Animation library
+- **Recharts** - Charts and visualizations
+- **React Hook Form** - Form management
+- **Zustand** - State management
+- **Axios** - HTTP client
+
+### Backend
+- **FastAPI** - Modern Python web framework
+- **Python 3.12** - Programming language
+- **SQLAlchemy** - ORM
+- **Alembic** - Database migrations
+
+### Database
+- **PostgreSQL** - Relational database
+- **Redis** - Caching and message queue
+
+### AI/ML
+- **Scikit-Learn** - Machine learning library
+- **XGBoost** - Gradient boosting
+- **CatBoost** - Categorical boosting
+- **LangChain** - LLM framework
+- **OpenAI API** - GPT models
+
+### DevOps
+- **Docker** - Container technology
+- **Kubernetes** - Orchestration
+- **AWS** - Cloud infrastructure
+- **GitHub Actions** - CI/CD
+
+## Project Structure
+
+```
+buildsmart-ai/
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── endpoints/
+│   │   │   │   ├── auth.py
+│   │   │   │   ├── projects.py
+│   │   │   │   ├── cost.py
+│   │   │   │   ├── design.py
+│   │   │   │   ├── boq.py
+│   │   │   │   ├── timeline.py
+│   │   │   │   ├── risk.py
+│   │   │   │   └── chat.py
+│   │   ├── core/
+│   │   │   ├── config.py
+│   │   │   └── security.py
+│   │   ├── db/
+│   │   │   ├── base.py
+│   │   │   └── session.py
+│   │   ├── models/
+│   │   │   ├── user.py
+│   │   │   ├── project.py
+│   │   │   ├── material_rate.py
+│   │   │   ├── building_template.py
+│   │   │   ├── prediction.py
+│   │   │   └── chat_history.py
+│   │   ├── schemas/
+│   │   │   ├── user.py
+│   │   │   ├── project.py
+│   │   │   ├── cost.py
+│   │   │   ├── design.py
+│   │   │   ├── boq.py
+│   │   │   ├── timeline.py
+│   │   │   ├── risk.py
+│   │   │   └── chat.py
+│   │   ├── services/
+│   │   │   ├── user_service.py
+│   │   │   ├── project_service.py
+│   │   │   ├── cost_service.py
+│   │   │   ├── design_service.py
+│   │   │   ├── boq_service.py
+│   │   │   ├── timeline_service.py
+│   │   │   ├── risk_service.py
+│   │   │   └── chat_service.py
+│   │   ├── ml/
+│   │   └── main.py
+│   ├── tests/
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   └── .env.example
+│
+├── frontend/
+│   ├── app/
+│   │   ├── page.tsx (Home)
+│   │   ├── login/
+│   │   ├── register/
+│   │   ├── dashboard/
+│   │   ├── cost-estimator/
+│   │   ├── design-studio/
+│   │   ├── timeline/
+│   │   ├── risk-analysis/
+│   │   ├── boq/
+│   │   ├── ai-assistant/
+│   │   └── layout.tsx
+│   ├── components/
+│   │   ├── Header.tsx
+│   │   └── ui/
+│   ├── lib/
+│   │   ├── api-client.ts
+│   │   └── api-config.ts
+│   ├── store/
+│   │   ├── auth.ts
+│   │   └── projects.ts
+│   ├── package.json
+│   ├── Dockerfile
+│   └── next.config.js
+│
+├── devops/
+│   └── kubernetes-deployment.yaml
+│
+├── docker-compose.yml
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml
+└── README.md
+```
+
+## API Endpoints
+
+### Authentication
+- `POST /api/v1/auth/register` - Register new user
+- `POST /api/v1/auth/login` - Login user
+- `GET /api/v1/auth/me` - Get current user
+
+### Projects
+- `GET /api/v1/projects/` - List projects
+- `POST /api/v1/projects/` - Create project
+- `GET /api/v1/projects/{id}` - Get project
+- `PUT /api/v1/projects/{id}` - Update project
+- `DELETE /api/v1/projects/{id}` - Delete project
+
+### Cost Prediction
+- `POST /api/v1/cost/predict` - Predict cost
+
+### Design Generation
+- `POST /api/v1/design/generate` - Generate design
+
+### BOQ
+- `POST /api/v1/boq/generate` - Generate BOQ
+
+### Timeline
+- `POST /api/v1/timeline/predict` - Predict timeline
+
+### Risk Analysis
+- `POST /api/v1/risk/analyze` - Analyze risks
+
+### Chat
+- `POST /api/v1/chat/ask` - Ask AI assistant
+- `GET /api/v1/chat/history/{user_id}` - Get chat history
+
+## Getting Started
+
+### Prerequisites
+- Docker & Docker Compose
+- Node.js 20+
+- Python 3.12+
+- PostgreSQL 15+
+- Redis 7+
+
+### Local Development
+
+1. Clone the repository
+```bash
+git clone https://github.com/yourusername/buildsmart-ai.git
+cd buildsmart-ai
+```
+
+2. Set up environment variables
+```bash
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env.local
+```
+
+3. Start services with Docker Compose
+```bash
+docker-compose up -d
+```
+
+4. Access the application
+- Frontend: http://localhost:3000
+- API: http://localhost:8000
+- API Docs: http://localhost:8000/docs
+
+### Database Setup
+
+```bash
+# Apply migrations
+docker-compose exec backend alembic upgrade head
+
+# Create initial data (optional)
+docker-compose exec backend python -m app.scripts.seed
+```
+
+## Features
+
+### 1. Cost Prediction Engine
+- AI-powered cost estimation using XGBoost
+- Location-based cost indices
+- Material and labor cost breakdown
+- Confidence scores and risk assessment
+
+### 2. Building Design Generator
+- Automatic floor plan generation
+- Space optimization
+- Design style variations
+- 2D and 3D visualization
+
+### 3. Material Recommendation Engine
+- Bill of Quantities (BOQ) generation
+- Material cost estimation
+- Supplier recommendations
+- Export to PDF and Excel
+
+### 4. Timeline Prediction
+- Project schedule generation
+- Phase-based breakdown
+- Gantt chart visualization
+- Risk-adjusted timelines
+
+### 5. Risk Analysis
+- Budget overrun risk assessment
+- Schedule delay risk analysis
+- Material shortage prediction
+- Weather and geological risk evaluation
+
+### 6. AI Chatbot
+- Construction cost queries
 - Material recommendations
-- Building design suggestions
-- Timeline estimation
-- BOQ explanation
-- Building regulations guidance
+- Design suggestions
+- Building regulation guidance
 
-Sample Questions:
+## Deployment
 
-How much will a 2000 sqft villa cost in Mexico City?
+### Docker Compose (Development)
+```bash
+docker-compose up -d
+```
 
-Which material is best for humid climates?
+### Kubernetes (Production)
+```bash
+kubectl apply -f devops/kubernetes-deployment.yaml
+kubectl port-forward -n buildsmart svc/frontend 3000:3000
+kubectl port-forward -n buildsmart svc/backend 8000:8000
+```
 
-Generate a modern duplex design.
+### AWS Deployment
+```bash
+# Build images
+docker build -t buildsmart-api:latest -f backend/Dockerfile .
+docker build -t buildsmart-web:latest -f frontend/Dockerfile .
 
-What is the estimated timeline for a commercial building?
+# Push to ECR
+aws ecr get-login-password | docker login --username AWS --password-stdin <account-id>.dkr.ecr.<region>.amazonaws.com
+docker tag buildsmart-api:latest <account-id>.dkr.ecr.<region>.amazonaws.com/buildsmart-api:latest
+docker push <account-id>.dkr.ecr.<region>.amazonaws.com/buildsmart-api:latest
+```
 
-=========================================================
-FRONTEND PAGES
-=========================================================
+## Testing
 
-Create responsive professional UI.
+### Backend Tests
+```bash
+cd backend
+pytest tests/ -v --cov=app
+```
 
-Pages:
+### Frontend Tests
+```bash
+cd frontend
+npm test
+```
 
-Landing Page
-Login
-Register
-Dashboard
-Projects
-Cost Estimator
-Design Studio
-Material Calculator
-BOQ Generator
-Timeline Predictor
-Risk Analysis
-AI Assistant
-Reports
-Admin Portal
+## Security
 
-=========================================================
-DASHBOARD COMPONENTS
-=========================================================
+- JWT authentication
+- Role-based access control (RBAC)
+- Input validation and sanitization
+- SQL injection prevention (SQLAlchemy ORM)
+- CORS protection
+- Rate limiting
+- Secure password hashing (bcrypt)
 
-Statistics Cards
+## Performance
 
-Total Projects
-Estimated Savings
-Average Cost
-Risk Score
+- Database query optimization with indexes
+- Redis caching layer
+- API response compression
+- Frontend code splitting
+- Image optimization
+- CDN integration ready
 
-Charts
+## Documentation
 
-Cost Trend
-Material Cost Breakdown
-Project Status
-Risk Distribution
+- API documentation: `/docs` (Swagger UI)
+- API ReDoc: `/redoc`
+- Architecture documentation: See `docs/` folder
 
-Recent Projects Table
+## Contributing
 
-=========================================================
-UI DESIGN
-=========================================================
+1. Create a feature branch: `git checkout -b feature/amazing-feature`
+2. Commit your changes: `git commit -m 'Add amazing feature'`
+3. Push to the branch: `git push origin feature/amazing-feature`
+4. Open a Pull Request
 
-Modern SaaS Design
+## License
 
-Theme:
-Dark + Light Mode
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-Primary Color:
-#2563EB
+## Support
 
-Design Style:
-Professional
-Construction Industry
-AI Powered
+For support, email support@buildsmart.ai or create an issue on GitHub.
 
-Include:
+## Roadmap
 
-Animated Cards
-Modern Sidebar
-Top Navigation
-Responsive Layout
-Loading Skeletons
-Toast Notifications
-
-=========================================================
-API DESIGN
-=========================================================
-
-Create FastAPI endpoints:
-
-/api/auth/register
-/api/auth/login
-
-/api/projects
-
-/api/cost/predict
-
-/api/design/generate
-
-/api/material/recommend
-
-/api/boq/generate
-
-/api/timeline/predict
-
-/api/risk/analyze
-
-/api/chat
-
-/api/reports/pdf
-
-=========================================================
-DEVOPS
-=========================================================
-
-Generate:
-
-Dockerfile
-docker-compose.yml
-
-GitHub Actions
-
-CI/CD Pipeline
-
-Kubernetes Deployment YAML
-
-Terraform Infrastructure
-
-=========================================================
-SECURITY
-=========================================================
-
-Implement:
-
-JWT Authentication
-Role Based Access Control
-Rate Limiting
-Input Validation
-Audit Logs
-
-=========================================================
-OUTPUT REQUIREMENTS
-=========================================================
-
-Generate complete production-ready code.
-
-Create:
-
-1. Full project structure
-2. Frontend code
-3. Backend code
-4. Database schema
-5. AI modules
-6. API routes
-7. Docker setup
-8. CI/CD setup
-9. Kubernetes setup
-10. README documentation
-11. Seed data
-12. Unit tests
-13. Integration tests
-
-Use best coding practices, SOLID principles, scalable architecture, repository pattern, service layer pattern, clean code, TypeScript strict mode, and enterprise-grade standards.
-
-Generate the application module-by-module with complete source code.
+- [ ] Mobile app (React Native)
+- [ ] Advanced 3D visualization
+- [ ] ML model training pipeline
+- [ ] Real-time collaboration features
+- [ ] Payment integration
+- [ ] Advanced reporting and analytics
+- [ ] Integration with building management systems
+- [ ] AR/VR visualization

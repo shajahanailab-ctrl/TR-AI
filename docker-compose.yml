@@ -1,13 +1,11 @@
 version: '3.8'
 
 services:
-  # PostgreSQL Database
   postgres:
     image: postgres:15-alpine
-    container_name: buildsmart-postgres
     environment:
       POSTGRES_USER: buildsmart
-      POSTGRES_PASSWORD: buildsmart_pass
+      POSTGRES_PASSWORD: buildsmart_password
       POSTGRES_DB: buildsmart_db
     ports:
       - "5432:5432"
@@ -19,10 +17,8 @@ services:
       timeout: 5s
       retries: 5
 
-  # Redis Cache
   redis:
     image: redis:7-alpine
-    container_name: buildsmart-redis
     ports:
       - "6379:6379"
     healthcheck:
@@ -31,20 +27,17 @@ services:
       timeout: 5s
       retries: 5
 
-  # FastAPI Backend
   backend:
     build:
-      context: .
-      dockerfile: backend/Dockerfile
-    container_name: buildsmart-api
-    environment:
-      DATABASE_URL: postgresql://buildsmart:buildsmart_pass@postgres:5432/buildsmart_db
-      REDIS_URL: redis://redis:6379
-      SECRET_KEY: your-secret-key-change-in-production
-      ENVIRONMENT: production
-      DEBUG: "False"
+      context: ./backend
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://buildsmart:buildsmart_password@postgres:5432/buildsmart_db
+      - REDIS_URL=redis://redis:6379
+      - DEBUG=False
+      - SECRET_KEY=your-super-secret-key-change-this-in-production
     depends_on:
       postgres:
         condition: service_healthy
@@ -54,25 +47,19 @@ services:
       - ./backend:/app
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
-  # Next.js Frontend
   frontend:
     build:
-      context: .
-      dockerfile: frontend/Dockerfile
-    container_name: buildsmart-web
-    environment:
-      NEXT_PUBLIC_API_URL: http://localhost:8000
+      context: ./frontend
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
     depends_on:
       - backend
     volumes:
       - ./frontend:/app
-      - /app/.next
+    command: npm run dev
 
 volumes:
   postgres_data:
-
-networks:
-  default:
-    name: buildsmart-network

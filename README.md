@@ -4,130 +4,86 @@
 
 BuildSmart AI is an AI-powered Construction Cost Prediction and Building Design Assistant that helps homeowners, architects, civil engineers, contractors, builders, and construction companies estimate project costs, generate building designs, calculate materials, predict project timelines, analyze risks, and interact with an AI construction chatbot.
 
-## Technology Stack
+## Quick Start
 
-### Frontend
-- **Next.js 15** - React framework for production
-- **React 19** - UI library
-- **TypeScript** - Type safety
-- **TailwindCSS** - Utility-first CSS framework
-- **ShadCN UI** - Component library
-- **Framer Motion** - Animation library
-- **Recharts** - Charts and visualizations
-- **React Hook Form** - Form management
-- **Zustand** - State management
-- **Axios** - HTTP client
+### Prerequisites
+- Docker & Docker Compose
+- Node.js 20+ (for local frontend development)
+- Python 3.12+ (for local backend development)
+- PostgreSQL 15+ (optional, if running without Docker)
+- Redis 7+ (optional, if running without Docker)
 
-### Backend
-- **FastAPI** - Modern Python web framework
-- **Python 3.12** - Programming language
-- **SQLAlchemy** - ORM
-- **Alembic** - Database migrations
+### Local Development with Docker
 
-### Database
-- **PostgreSQL** - Relational database
-- **Redis** - Caching and message queue
+1. **Clone and Setup**
+```bash
+cd buildsmart-ai
+```
 
-### AI/ML
-- **Scikit-Learn** - Machine learning library
-- **XGBoost** - Gradient boosting
-- **CatBoost** - Categorical boosting
-- **LangChain** - LLM framework
-- **OpenAI API** - GPT models
+2. **Start Services**
+```bash
+docker-compose up -d
+```
 
-### DevOps
-- **Docker** - Container technology
-- **Kubernetes** - Orchestration
-- **AWS** - Cloud infrastructure
-- **GitHub Actions** - CI/CD
+3. **Access the Application**
+- Frontend: http://localhost:3000
+- API: http://localhost:8000
+- API Docs: http://localhost:8000/docs
+- API ReDoc: http://localhost:8000/redoc
+
+4. **Database Initialization**
+```bash
+docker-compose exec backend alembic upgrade head
+```
+
+### Local Frontend Development
+
+```bash
+cd frontend
+npm install
+npm run dev
+# Runs on http://localhost:3000
+```
+
+### Local Backend Development
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+# Runs on http://localhost:8000
+```
 
 ## Project Structure
 
 ```
 buildsmart-ai/
-├── backend/
+├── backend/                 # FastAPI application
 │   ├── app/
-│   │   ├── api/
-│   │   │   ├── endpoints/
-│   │   │   │   ├── auth.py
-│   │   │   │   ├── projects.py
-│   │   │   │   ├── cost.py
-│   │   │   │   ├── design.py
-│   │   │   │   ├── boq.py
-│   │   │   │   ├── timeline.py
-│   │   │   │   ├── risk.py
-│   │   │   │   └── chat.py
-│   │   ├── core/
-│   │   │   ├── config.py
-│   │   │   └── security.py
-│   │   ├── db/
-│   │   │   ├── base.py
-│   │   │   └── session.py
-│   │   ├── models/
-│   │   │   ├── user.py
-│   │   │   ├── project.py
-│   │   │   ├── material_rate.py
-│   │   │   ├── building_template.py
-│   │   │   ├── prediction.py
-│   │   │   └── chat_history.py
-│   │   ├── schemas/
-│   │   │   ├── user.py
-│   │   │   ├── project.py
-│   │   │   ├── cost.py
-│   │   │   ├── design.py
-│   │   │   ├── boq.py
-│   │   │   ├── timeline.py
-│   │   │   ├── risk.py
-│   │   │   └── chat.py
-│   │   ├── services/
-│   │   │   ├── user_service.py
-│   │   │   ├── project_service.py
-│   │   │   ├── cost_service.py
-│   │   │   ├── design_service.py
-│   │   │   ├── boq_service.py
-│   │   │   ├── timeline_service.py
-│   │   │   ├── risk_service.py
-│   │   │   └── chat_service.py
-│   │   ├── ml/
-│   │   └── main.py
-│   ├── tests/
+│   │   ├── api/            # API routers
+│   │   ├── core/           # Configuration & security
+│   │   ├── db/             # Database setup
+│   │   ├── models/         # SQLAlchemy models
+│   │   ├── schemas/        # Pydantic schemas
+│   │   ├── services/       # Business logic
+│   │   ├── ml/             # ML models
+│   │   └── main.py         # FastAPI app
 │   ├── requirements.txt
-│   ├── Dockerfile
-│   └── .env.example
+│   └── Dockerfile
 │
-├── frontend/
-│   ├── app/
-│   │   ├── page.tsx (Home)
-│   │   ├── login/
-│   │   ├── register/
-│   │   ├── dashboard/
-│   │   ├── cost-estimator/
-│   │   ├── design-studio/
-│   │   ├── timeline/
-│   │   ├── risk-analysis/
-│   │   ├── boq/
-│   │   ├── ai-assistant/
-│   │   └── layout.tsx
-│   ├── components/
-│   │   ├── Header.tsx
-│   │   └── ui/
-│   ├── lib/
-│   │   ├── api-client.ts
-│   │   └── api-config.ts
-│   ├── store/
-│   │   ├── auth.ts
-│   │   └── projects.ts
+├── frontend/                # Next.js 15 application
+│   ├── app/                # App router pages
+│   ├── components/         # React components
+│   ├── lib/                # Utilities & API client
+│   ├── store/              # Zustand state management
 │   ├── package.json
-│   ├── Dockerfile
-│   └── next.config.js
+│   └── Dockerfile
 │
-├── devops/
+├── devops/                  # DevOps configuration
 │   └── kubernetes-deployment.yaml
 │
-├── docker-compose.yml
-├── .github/
-│   └── workflows/
-│       └── ci-cd.yml
+├── docker-compose.yml       # Docker Compose setup
+├── .github/workflows/       # CI/CD workflows
 └── README.md
 ```
 
@@ -164,50 +120,7 @@ buildsmart-ai/
 - `POST /api/v1/chat/ask` - Ask AI assistant
 - `GET /api/v1/chat/history/{user_id}` - Get chat history
 
-## Getting Started
-
-### Prerequisites
-- Docker & Docker Compose
-- Node.js 20+
-- Python 3.12+
-- PostgreSQL 15+
-- Redis 7+
-
-### Local Development
-
-1. Clone the repository
-```bash
-git clone https://github.com/yourusername/buildsmart-ai.git
-cd buildsmart-ai
-```
-
-2. Set up environment variables
-```bash
-cp backend/.env.example backend/.env
-cp frontend/.env.example frontend/.env.local
-```
-
-3. Start services with Docker Compose
-```bash
-docker-compose up -d
-```
-
-4. Access the application
-- Frontend: http://localhost:3000
-- API: http://localhost:8000
-- API Docs: http://localhost:8000/docs
-
-### Database Setup
-
-```bash
-# Apply migrations
-docker-compose exec backend alembic upgrade head
-
-# Create initial data (optional)
-docker-compose exec backend python -m app.scripts.seed
-```
-
-## Features
+## Key Features
 
 ### 1. Cost Prediction Engine
 - AI-powered cost estimation using XGBoost
@@ -245,31 +158,41 @@ docker-compose exec backend python -m app.scripts.seed
 - Design suggestions
 - Building regulation guidance
 
-## Deployment
+## Technology Stack
 
-### Docker Compose (Development)
-```bash
-docker-compose up -d
-```
+### Frontend
+- **Next.js 15** - React framework
+- **React 19** - UI library
+- **TypeScript** - Type safety
+- **TailwindCSS** - Styling
+- **Framer Motion** - Animations
+- **Recharts** - Charts & visualizations
+- **Zustand** - State management
+- **Axios** - HTTP client
 
-### Kubernetes (Production)
-```bash
-kubectl apply -f devops/kubernetes-deployment.yaml
-kubectl port-forward -n buildsmart svc/frontend 3000:3000
-kubectl port-forward -n buildsmart svc/backend 8000:8000
-```
+### Backend
+- **FastAPI** - Python web framework
+- **SQLAlchemy** - ORM
+- **Alembic** - Database migrations
+- **Pydantic** - Data validation
+- **JWT** - Authentication
 
-### AWS Deployment
-```bash
-# Build images
-docker build -t buildsmart-api:latest -f backend/Dockerfile .
-docker build -t buildsmart-web:latest -f frontend/Dockerfile .
+### Database & Cache
+- **PostgreSQL** - Relational database
+- **Redis** - Caching & message queue
 
-# Push to ECR
-aws ecr get-login-password | docker login --username AWS --password-stdin <account-id>.dkr.ecr.<region>.amazonaws.com
-docker tag buildsmart-api:latest <account-id>.dkr.ecr.<region>.amazonaws.com/buildsmart-api:latest
-docker push <account-id>.dkr.ecr.<region>.amazonaws.com/buildsmart-api:latest
-```
+### AI/ML
+- **LangChain** - LLM framework
+- **OpenAI API** - GPT models
+- **Scikit-Learn** - Machine learning
+- **XGBoost** - Gradient boosting
+- **CatBoost** - Categorical boosting
+
+### DevOps
+- **Docker** - Containerization
+- **Docker Compose** - Local development
+- **Kubernetes** - Production orchestration
+- **GitHub Actions** - CI/CD
 
 ## Testing
 
@@ -285,30 +208,51 @@ cd frontend
 npm test
 ```
 
+## Deployment
+
+### Kubernetes
+```bash
+kubectl apply -f devops/kubernetes-deployment.yaml
+```
+
+### Docker Compose
+```bash
+docker-compose up -d
+```
+
+## Environment Variables
+
+### Backend (.env)
+```
+DATABASE_URL=postgresql://user:password@localhost:5432/buildsmart
+REDIS_URL=redis://localhost:6379
+SECRET_KEY=your-secret-key
+OPENAI_API_KEY=your-openai-key
+```
+
+### Frontend (.env.local)
+```
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
 ## Security
 
-- JWT authentication
+- JWT authentication with bcrypt password hashing
 - Role-based access control (RBAC)
 - Input validation and sanitization
-- SQL injection prevention (SQLAlchemy ORM)
+- SQL injection prevention via ORM
 - CORS protection
 - Rate limiting
-- Secure password hashing (bcrypt)
+- Secure headers
 
 ## Performance
 
 - Database query optimization with indexes
 - Redis caching layer
 - API response compression
-- Frontend code splitting
+- Frontend code splitting and lazy loading
 - Image optimization
-- CDN integration ready
-
-## Documentation
-
-- API documentation: `/docs` (Swagger UI)
-- API ReDoc: `/redoc`
-- Architecture documentation: See `docs/` folder
+- CDN-ready architecture
 
 ## Contributing
 
@@ -331,7 +275,13 @@ For support, email support@buildsmart.ai or create an issue on GitHub.
 - [ ] Advanced 3D visualization
 - [ ] ML model training pipeline
 - [ ] Real-time collaboration features
-- [ ] Payment integration
+- [ ] Payment integration (Stripe)
 - [ ] Advanced reporting and analytics
 - [ ] Integration with building management systems
 - [ ] AR/VR visualization
+
+## Documentation
+
+- API Documentation: Available at `/docs` (Swagger UI) and `/redoc` when backend is running
+- Architecture documentation: See `docs/` folder
+- Environment setup: See individual service README files

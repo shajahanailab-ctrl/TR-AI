@@ -1,4 +1,4 @@
-.gitignore
+# BuildSmart AI - .gitignore
 
 # Python
 __pycache__/
@@ -6,28 +6,29 @@ __pycache__/
 *$py.class
 *.so
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# Virtual environments
+env/
 venv/
 ENV/
-env/
-.venv
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+.next/
+out/
+build/
+*.tgz
+
+# Environment variables
+.env
+.env.local
+.env.*.local
 
 # IDE
 .vscode/
@@ -37,10 +38,9 @@ env/
 *~
 .DS_Store
 
-# Environment
-.env
-.env.local
-.env.*.local
+# Docker
+.dockerignore
+docker-compose.override.yml
 
 # Database
 *.db
@@ -51,25 +51,11 @@ env/
 *.log
 logs/
 
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
+# OS
+.DS_Store
+Thumbs.db
 
-# Docker
-.dockerignore
-docker-compose.override.yml
-
-# Node
-node_modules/
-npm-debug.log
-yarn-error.log
-.next/
-
-# AWS
-.aws/
-
-# Misc
-*.tmp
-.cache/
+# Build artifacts
+dist/
+build/
+.turbo/

@@ -1,0 +1,35 @@
+from typing import List, Dict
+
+def calculate_statistics(numbers: List[float]) -> Dict[str, float]:
+    if not numbers:
+        raise ValueError("The input list cannot be empty.")
+
+    total = sum(numbers)
+    count = len(numbers)
+    average = total / count
+    maximum = max(numbers)
+    minimum = min(numbers)
+
+    return {
+        "total": total,
+        "count": count,
+        "average": average,
+        "maximum": maximum,
+        "minimum": minimum
+    }
+
+def main():
+    sample_data = [12, 45, 67, 23, 89, 34, 56, 78, 90, 11]
+
+    try:
+        result = calculate_statistics(sample_data)
+
+        print("Statistics Report")
+        for key, value in result.items():
+            print(f"{key.capitalize()}: {value}")
+
+    except ValueError as error:
+        print(f"Error: {error}")
+
+if __name__ == "__main__":
+    main()

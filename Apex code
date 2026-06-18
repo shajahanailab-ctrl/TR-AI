@@ -1,0 +1,79 @@
+public with sharing class AccountService {
+
+    /**
+     * Updates the Industry field for the specified Accounts.
+     *
+     * @param accountIds List of Account Ids.
+     * @param industry   New Industry value.
+     */
+    public static void updateAccountIndustry(Set<Id> accountIds, String industry) {
+
+        // Input validation
+        if (accountIds == null || accountIds.isEmpty()) {
+            throw new IllegalArgumentException('Account Ids cannot be empty.');
+        }
+
+        if (String.isBlank(industry)) {
+            throw new IllegalArgumentException('Industry cannot be blank.');
+        }
+
+        // CRUD Check
+        if (!Schema.sObjectType.Account.isAccessible()) {
+            throw new SecurityException('User does not have access to Account.');
+        }
+
+        if (!Schema.sObjectType.Account.isUpdateable()) {
+            throw new SecurityException('User does not have permission to update Account.');
+        }
+
+        List<Account> accounts;
+
+        try {
+            accounts = [
+                SELECT Id, Industry
+                FROM Account
+                WHERE Id IN :accountIds
+                WITH SECURITY_ENFORCED
+            ];
+        } catch (Exception ex) {
+            throw new SecurityException(
+                'Unable to query Account records due to security restrictions.'
+            );
+        }
+
+        if (accounts.isEmpty()) {
+            return;
+        }
+
+        for (Account acc : accounts) {
+            acc.Industry = industry;
+        }
+
+        // Remove fields the user cannot update
+        SObjectAccessDecision accessDecision =
+            Security.stripInaccessible(
+                AccessType.UPDATABLE,
+                accounts
+            );
+
+        List<Account> recordsToUpdate =
+            (List<Account>)accessDecision.getRecords();
+
+        if (!recordsToUpdate.isEmpty()) {
+            Database.SaveResult[] results =
+                Database.update(recordsToUpdate, false);
+
+            for (Database.SaveResult sr : results) {
+                if (!sr.isSuccess()) {
+                    for (Database.Error err : sr.getErrors()) {
+                        System.debug(
+                            LoggingLevel.ERROR,
+                            'Update failed: ' + err.getStatusCode() +
+                            ' - ' + err.getMessage()
+                        );
+                    }
+                }
+            }
+        }
+    }
+}

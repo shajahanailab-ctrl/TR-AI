@@ -1,0 +1,30 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class EmployeeManager {
+
+    public static void main(String[] args) {
+        List<String> employees = new ArrayList<>();
+        employees.add("Alice");
+        employees.add("Bob");
+        employees.add("Charlie");
+        employees.add("David");
+        employees.add("Emma");
+
+        System.out.println("Employee List:");
+        for (String employee : employees) {
+            System.out.println(employee);
+        }
+
+        int totalEmployees = employees.size();
+        System.out.println("Total Employees: " + totalEmployees);
+
+        if (employees.contains("Alice")) {
+            System.out.println("Alice is available.");
+        } else {
+            System.out.println("Alice is not available.");
+        }
+
+        System.out.println("Program completed successfully.");
+    }
+}

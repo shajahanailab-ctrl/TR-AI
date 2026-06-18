@@ -1,0 +1,282 @@
+You are building a premium, production-ready SaaS web application called "CodeReview AI" 
+with the tagline: "Review Smarter. Ship Faster."
+
+### PROJECT REQUIREMENTS
+
+**Core Purpose:**
+Build an AI-powered code review platform that helps developers submit source code and receive 
+context-aware, human-like review comments with explanations, fixes, refactoring recommendations, 
+security analysis, and performance optimizations.
+
+**Target Users:** Software developers, engineering teams, tech leads, and enterprises
+
+---
+
+### EXTERNAL AI API INTEGRATION
+
+**Use this API for real-time code analysis:**
+- **Endpoint:** https://genailab.tcs.in/#/Claude%20Code%20Marketplace/get_plugin_claude_code_plugins__plugin_name__get
+- **API Key:** sk-icX9ETxLbpJ2OdohIkSyzg
+- **Purpose:** Generate real-time AI code review analysis and suggestions
+
+Integrate this API to power the AI analysis engine for code reviews.
+
+---
+
+### SUPPORTED PROGRAMMING LANGUAGES
+
+Implement code review support for:
+1. **Java** - NullPointerException risks, Exception handling, Stream API improvements, Java modernization
+2. **Apex (Salesforce)** - Governor Limits, SOQL/DML optimization, Bulkification, Trigger best practices, code coverage, static code analysis
+3. **Python** - PEP 8 compliance, Type hints, Exception handling, Performance optimization
+4. **JavaScript** - ES6+, Async/Await, Promise optimization, DOM performance, Security best practices
+
+Use Monaco Editor for syntax highlighting and language detection.
+
+---
+
+### APPLICATION MODULES
+
+**1. Authentication & User Management**
+- Login, Registration, Forgot Password
+- GitHub OAuth Login
+- User Profiles with role-based access control
+- Roles: Developer, Reviewer, Team Lead, Admin
+
+**2. Dashboard**
+- Real-time analytics: Total Reviews, Code Quality Score, AI Suggestions Accepted, Open/Completed Reviews
+- Interactive charts: Daily reviews, Repository stats, Issue distribution, Security findings, Performance issues
+- Recent activity timeline
+- Key metrics: Average review time, Lines reviewed, Technical debt
+
+**3. AI Code Review Editor**
+- Monaco Editor supporting all 4 languages
+- Multiple input methods: Paste code, Upload files, Drag & Drop, Import repositories
+- Support for GitHub Pull Request reviews
+- Real-time AI analysis with one-click review
+
+**4. AI Analysis Engine**
+Perform comprehensive analysis for:
+- **General:** Syntax issues, Logic errors, Code smells, Anti-patterns, Duplicate/dead code, SOLID/DRY violations, Design patterns
+- **Security:** OWASP Top 10, SQL Injection, Hardcoded secrets, Sensitive data, Authentication/Authorization flaws, API misuse
+- **Performance:** Memory leaks, Resource leaks, Expensive operations, Database optimization, Concurrency issues
+
+**5. Inline Code Review**
+- Highlight issues directly in Monaco Editor
+- Color coding: Critical (Red), High (Orange), Medium (Yellow), Suggestions (Blue), Passed (Green)
+- Hover tooltips showing AI comment, explanation, and suggested fix
+
+**6. AI Chat Assistant**
+- Conversational interface for: Explaining code, Optimization suggestions, Bug detection, Readability improvements, Security explanations, Documentation generation, Unit test generation, Design pattern suggestions
+
+**7. Review Management**
+- Edit/Delete comments, Resolve issues, Accept/Reject suggestions
+- Reply to comments, Mention teammates, Add attachments
+- Track review status
+
+**8. Repository Integration**
+- GitHub, GitLab, Bitbucket integration
+- Repository browser, Branch selection, PR reviews
+- Automatic PR comments, Repository sync
+
+**9. Review History & Analytics**
+- Search, Filter, Sort by: Repository, Language, Developer, Severity, Date
+- Export reports: PDF, Excel, JSON, Markdown
+- Code Quality Trends, Security Score, Technical Debt analysis
+- Developer Performance metrics, Language statistics
+
+**10. Settings Page**
+- AI Provider configuration (OpenAI, Claude, Gemini)
+- API Keys management
+- Review strictness levels, Coding standards
+- Theme toggle (Dark/Light), Notifications
+
+---
+
+### AI REVIEW OUTPUT FORMAT
+
+Every issue must include:
+- **Severity:** Critical, High, Medium, Low, Informational
+- **Category:** Security, Performance, Code Quality, Best Practice
+- **File Name & Line Number**
+- **Description:** What the issue is
+- **Why It Matters:** Impact explanation
+- **Suggested Fix:** Clear solution
+- **Improved Code Example:** Copy-paste ready code
+- **Confidence Score:** 1-100%
+- **Estimated Impact:** Time saved, Risk reduction
+- **Reference Documentation:** Relevant links
+
+Response format (JSON):
+{
+  "overall_score": number (0-100),
+  "summary": "string",
+  "issues": [
+    {
+      "title": "string",
+      "severity": "Critical|High|Medium|Low|Informational",
+      "language": "Java|Apex|Python|JavaScript",
+      "category": "string",
+      "line": number,
+      "description": "string",
+      "why_it_matters": "string",
+      "suggestion": "string",
+      "improved_code": "string",
+      "confidence": number (0-100),
+      "estimated_impact": "string",
+      "references": ["url"]
+    }
+  ]
+}
+
+---
+
+### UI/UX REQUIREMENTS
+
+Design a **premium developer experience** inspired by GitHub Copilot Workspace, SonarQube, Cursor AI, ChatGPT, and Linear:
+
+**Visual Design:**
+- Glassmorphism effects
+- Dark mode (default) & Light mode toggle
+- Modern gradient backgrounds
+- Smooth micro-animations
+- Monaco Editor as primary component
+
+**Components:**
+- Responsive layout (Mobile, Tablet, Desktop)
+- Animated Dashboard with real-time metrics
+- Interactive Charts (Recharts or similar)
+- AI Chat sidebar (collapsible)
+- Floating Action Buttons (FAB) for quick actions
+- Loading skeletons, Toast notifications
+- Modal dialogs for confirmations
+- Accessible UI (WCAG compliant)
+
+**Pages/Routes:**
+- `/` - Landing page with features, pricing, testimonials
+- `/login` - Authentication
+- `/register` - User registration
+- `/dashboard` - Main dashboard with analytics
+- `/review` - Code review editor
+- `/history` - Review history and reports
+- `/repositories` - Repository management
+- `/settings` - User and admin settings
+- `/profile` - User profile management
+
+---
+
+### TECHNOLOGY STACK (Your Choice)
+
+Use your own optimal technology stack for:
+- **Frontend:** Modern framework (React, Vue, Svelte, etc.) with TypeScript
+- **Styling:** Tailwind CSS or equivalent
+- **Backend:** Fast, scalable solution (Node.js, Python FastAPI, Go, etc.)
+- **Database:** PostgreSQL with migrations
+- **Caching:** Redis for performance
+- **Authentication:** JWT + OAuth 2.0
+- **Storage:** AWS S3 or equivalent
+- **Deployment:** Docker, Docker Compose, Kubernetes-ready
+
+---
+
+### SECURITY & COMPLIANCE
+
+Implement:
+- JWT Authentication with refresh tokens
+- OAuth 2.0 (GitHub Login)
+- HTTPS/TLS encryption
+- CSRF Protection
+- XSS Prevention
+- SQL Injection Prevention (Parameterized queries)
+- Rate Limiting
+- Secure API key management (Environment variables)
+- Audit logging of all reviews
+- GDPR compliance considerations
+
+---
+
+### KEY FEATURES
+
+✅ Real-time AI code analysis
+✅ Multi-language support (Java, Apex, Python, JavaScript)
+✅ Inline code comments with severity highlighting
+✅ AI Chat assistant for interactive code discussions
+✅ Repository integration (GitHub, GitLab, Bitbucket)
+✅ Review history with advanced search/filtering
+✅ Analytics dashboard with trends and metrics
+✅ Export reviews as PDF, Excel, JSON, Markdown
+✅ Role-based access control
+✅ Team collaboration features (mentions, replies, attachments)
+✅ Dark/Light theme
+✅ Mobile responsive design
+
+---
+
+### SUCCESS CRITERIA
+
+- AI Review Relevance ≥ 85%
+- Review Time Reduction ≥ 60%
+- False Positive Rate ≤ 10%
+- AI Response Time < 5 seconds
+- Mobile responsiveness 100%
+- Lighthouse score ≥ 90
+- Uptime 99.9%
+
+---
+
+### DELIVERABLES
+
+Create a complete, production-ready application with:
+
+✅ Modular, clean architecture
+✅ Responsive UI with premium design
+✅ Full authentication system
+✅ AI integration with external API
+✅ Database schema with migrations
+✅ REST/GraphQL API with documentation
+✅ Real-time analytics dashboard
+✅ Code review engine with all analysis types
+✅ Repository integrations
+✅ Export functionality (PDF, Excel, JSON, Markdown)
+✅ Admin settings panel
+✅ Error handling & logging
+✅ Loading states & skeletons
+✅ Toast notifications
+✅ Dark/Light theme toggle
+✅ Fully accessible (WCAG AA)
+✅ Performance optimized
+✅ SEO optimized landing page
+
+---
+
+### BUILD INSTRUCTIONS
+
+1. Create a modern, responsive web application
+2. Implement all authentication flows
+3. Design and build the dashboard with real-time metrics
+4. Build the Monaco Editor code review interface
+5. Integrate the provided AI API for real-time analysis
+6. Implement all review management features
+7. Build analytics and reporting dashboard
+8. Add repository integrations
+9. Create admin settings panel
+10. Ensure full mobile responsiveness
+11. Implement dark/light theme
+12. Add comprehensive error handling
+13. Deploy as production-ready application
+
+---
+
+### TONE & APPROACH
+
+- Professional, modern, developer-friendly
+- Focus on **speed, accuracy, and user experience**
+- Premium, enterprise-grade quality
+- Attention to micro-interactions and visual feedback
+- Accessibility-first approach
+
+Build this as a **complete, deployable, revenue-ready SaaS product**.
+
+Enable real user authentication with registration, sessions, and GitHub OAuth, including role-based access control.
+Ensure all application modules are available like Real-time analytics, Review Management with accept/reject review suggestions, Repository Integration by enabling Lovable Cloud so we can ship real auth, persisted reviews, and a working GitHub integration, interactive dashboard which can redirect to the selected tabs with real time data, history and changes. In accept/ review suggestions, if accept is selected, it should update the code with the suggestion provided and the issue should be removed from the issues list.if reject is selected, the issue should be removed from the issues list. upload files should fetch the file and should be able to view the code in the application.Please resolve all the issue before publishing 
+ 

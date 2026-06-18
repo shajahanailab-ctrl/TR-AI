@@ -1,0 +1,28 @@
+function calculateStatistics(numbers) {
+    if (!Array.isArray(numbers) || numbers.length === 0) {
+        throw new Error("Input must be a non-empty array.");
+    }
+
+    const total = numbers.reduce((sum, value) => sum + value, 0);
+    const average = total / numbers.length;
+    const maximum = Math.max(...numbers);
+    const minimum = Math.min(...numbers);
+
+    return {
+        total,
+        average,
+        maximum,
+        minimum,
+        count: numbers.length
+    };
+}
+
+const sampleData = [12, 45, 67, 23, 89, 34, 56, 78, 90, 11];
+
+try {
+    const result = calculateStatistics(sampleData);
+    console.log("Statistics Report:");
+    console.log(result);
+} catch (error) {
+    console.error("Error:", error.message);
+}
